@@ -58,7 +58,7 @@ public class XoaSuaController extends HttpServlet {
         	String slsua = request.getParameter(maxesua);
             if(slsua != null) {
                 long soLuongMoi = Long.parseLong(slsua);
-                hang.Them("",maxesua,"",(long)0,soLuongMoi);
+                hang.Them("",maxesua,"",(long)0,soLuongMoi,"");
                }
             } 
         // Cập nhật lại giỏ hàng trong session

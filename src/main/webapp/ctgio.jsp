@@ -93,69 +93,73 @@
         </nav>
     </div>
 
-    <!-- Chi tiết giỏ hàng -->
-    <div class="container mt-5 body-content">
-        <%
-            HangBo hangBo = (HangBo) session.getAttribute("hang");
-            if (hangBo != null && !hangBo.getDs().isEmpty()) {
-                ArrayList<Hang> ds = hangBo.getDs();
-        %>
-        <form action="XoaSuaController" method="post">
-            <div class="row">
-                <%
-                    for (Hang hang : ds) {
-                %>
-                <div class="col-md-12 mb-3">
-                    <div class="card product-card">
-                        <div class="row no-gutters">
-                            <!-- Ảnh sản phẩm lớn hơn -->
-                            <div class="col-md-3"  style="left: 20%; margin: auto;">
-                                <img src="img_xe/<%= hang.getAnh() %>" class="card-img" alt="<%= hang.getTenxe() %>" style="width: 100%; height: auto;">
-                            </div>
-                            <!-- Thông tin sản phẩm nằm phía góc phải -->
-                            <div class="col-md-9" style="left: 20%; margin: auto;">
-                                <div class="card-body">
-                                    <h5 class="card-title"><%= hang.getTenxe() %></h5>
-                                    <p class="card-text"><strong>Mã xe:</strong> <%= hang.getMaxe() %></p>
-                                    <p class="card-text"><strong>Giá:</strong> <%= hang.getGia() %> VND</p>
-                                    <p class="card-text"><strong>Số lượng:</strong> <%= hang.getSoluong() %></p>
-                                    <p class="card-text"><strong>Tổng tiền:</strong> <%= hang.getThanhtien() %> VND</p>
-                                    <p class="card-text">
-                                        <input type="checkbox" name="ck" value="<%= hang.getMaxe() %>"> Chọn
-                                        <input type="number" class="form-control d-inline" name="<%= hang.getMaxe() %>" value="0" style="width: 70px;">
-                                    </p>
-                                    <div class="mt-2">
-                                        <button type="submit" class="btn btn-success btn-sm" name="butsuasl" value="<%= hang.getMaxe() %>">Cập nhật</button>
-                                        <button type="submit" class="btn btn-danger btn-sm" name="maxexoa" value="<%= hang.getMaxe() %>">Xóa</button>
-                                    </div>
+   <div class="container mt-5 body-content">
+    <%
+        HangBo hangBo = (HangBo) session.getAttribute("hang");
+        if (hangBo != null && !hangBo.getDs().isEmpty()) {
+            ArrayList<Hang> ds = hangBo.getDs();
+    %>
+    <form action="XoaSuaController" method="post">
+        <div class="row">
+            <%
+                for (Hang hang : ds) {
+            %>
+            <div class="col-md-12 mb-3">
+                <div class="card product-card">
+                    <div class="row no-gutters">
+                        <!-- Cột ảnh -->
+                        <div class="col-md-3 d-flex align-items-center">
+                            <img src="img_xe/<%= hang.getAnh() %>" class="card-img" alt="<%= hang.getTenxe() %>" style="width: 100%; height: auto;">
+                        </div>
+
+                        <!-- Cột thông tin chi tiết -->
+                        <div class="col-md-9">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= hang.getTenxe() %></h5>
+                                <p class="card-text"><strong>Mã xe:</strong> <%= hang.getMaxe() %></p>
+                                <p class="card-text"><strong>Giá:</strong> <%= hang.getGia() %> VND</p>
+                                <p class="card-text"><strong>Số lượng:</strong> <%= hang.getSoluong() %></p>
+                                <p class="card-text"><strong>Tổng tiền:</strong> <%= hang.getThanhtien() %> VND</p>
+                                <p class="card-text"><strong>Chi tiết:</strong> <%= hang.getChitiet() %></p>
+
+                                <p class="card-text mt-2">
+                                    <input type="checkbox" name="ck" value="<%= hang.getMaxe() %>"> Chọn
+                                    <input type="number" class="form-control d-inline" name="<%= hang.getMaxe() %>" value="0" style="width: 70px;">
+                                </p>
+                                <div class="mt-2">
+                                    <button type="submit" class="btn btn-success btn-sm" name="butsuasl" value="<%= hang.getMaxe() %>">Cập nhật</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" name="maxexoa" value="<%= hang.getMaxe() %>">Xóa</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <%
-                    }
-                %>
             </div>
-            <div class="text-right mt-4">
-                <% 
-                    HangBo hangbo = (HangBo) session.getAttribute("hang");
-                    if (hangbo != null && !hangbo.getDs().isEmpty()) {
-                %>
-                <div class="text-right"><strong>Tổng Hoá Đơn:</strong> <%= hangBo.Tong() %> VND</div>
-                <% } %>
-                <button type="submit" class="btn btn-danger" name="xoachon">Xóa sản phẩm đã chọn</button>
-                <a href="ThanhToanController" class="btn btn-primary">Thanh toán</a>
-            </div>
-        </form>
-        <% } else { %>
-        <div class="alert alert-warning text-center mt-4">
-            <strong>Giỏ hàng của bạn đang trống!</strong>
-            <br>
-            <a href="TrangChuController" class="btn btn-primary mt-3">Quay lại trang chủ</a>
+            <%
+                }
+            %>
         </div>
-        <% } %>
+
+        <div class="text-right mt-4">
+            <% 
+                HangBo hangbo = (HangBo) session.getAttribute("hang");
+                if (hangbo != null && !hangbo.getDs().isEmpty()) {
+            %>
+            <div class="text-right"><strong>Tổng Hoá Đơn:</strong> <%= hangBo.Tong() %> VND</div>
+            <% } %>
+            <button type="submit" class="btn btn-danger" name="xoachon">Xóa sản phẩm đã chọn</button>
+            <a href="ThanhToanController" class="btn btn-primary">Thanh toán</a>
+        </div>
+    </form>
+    <% } else { %>
+    <div class="alert alert-warning text-center mt-4">
+        <strong>Giỏ hàng của bạn đang trống!</strong>
+        <br>
+        <a href="TrangChuController" class="btn btn-primary mt-3">Quay lại trang chủ</a>
     </div>
+    <% } %>
+</div>
+
 
     <!-- Floating tư vấn button -->
     <div class="floating-btn">

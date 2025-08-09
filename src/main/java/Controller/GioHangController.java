@@ -33,7 +33,7 @@ public class GioHangController extends HttpServlet {
 		String maxe=request.getParameter("maxe");
 	 	String tenxe=request.getParameter("tenxe");
 	 	String gia=request.getParameter("gia");
-	 	
+	 	String chitiet = request.getParameter("chitiet");
 	
 	 	if(maxe!=null&&tenxe!=null&&gia!=null){
 	 		HangBo hang= null;
@@ -43,7 +43,10 @@ public class GioHangController extends HttpServlet {
 	 			session.setAttribute("hang", hang);
 	 		}
 	 		hang=(HangBo)session.getAttribute("hang");
-	 		hang.Them(anh,maxe, tenxe,Long.parseLong(gia), (long)1);
+	 		//hang.Them(anh,maxe, tenxe,Long.parseLong(gia), (long)1);
+	 		long giaLong = (long) Double.parseDouble(gia);
+	 		hang.Them(anh, maxe, tenxe, Long.valueOf(giaLong), Long.valueOf(1), chitiet);
+
 	 		session.setAttribute("hang", hang);
 	 		response.sendRedirect("CTGioController");
 	 		

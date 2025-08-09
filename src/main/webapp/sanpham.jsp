@@ -127,7 +127,7 @@
 }
 
 .navbar-toggler-icon {
-	background-color: white; /* White icon for the toggle button */
+	background-color: white; 
 }
 .footer-section {
 	background-color: #333;
@@ -154,7 +154,7 @@
 </style>
 </head>
 <body>
-   <!-- thanh điều hướng -->
+  
      <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="TrangChuController">Quang Phương Motor</a>
@@ -175,7 +175,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="lienhe.jsp">Liên Hệ</a>
                     </li>
-                    <!-- "Tôi" section with user icon -->
+                   
                     <li class="nav-item">
                         <a class="nav-link" href="profile.jsp">
                             <i class="fas fa-user" style="color: white;"></i>
@@ -197,7 +197,7 @@
         </nav>
     </div>
     <div class="container mt-5">
-        <!-- Danh mục các loại sản phẩm -->
+        
         <h3 class="mb-4">Danh mục sản phẩm</h3>
         <div class="list-group mb-5">
             <c:forEach var="loai" items="${dsLoai}">
@@ -209,36 +209,43 @@
             </c:forEach>
         </div>
 
-        <!-- Hiển thị danh sách sản phẩm -->
-        <h3 class="mb-4">Sản phẩm</h3>
-        <div class="row">
-            <c:if test="${empty dsXe}">
-                <div class="col-12">
-                    <p class="text-center text-muted">Không có sản phẩm nào trong loại này.</p>
-                </div>
-            </c:if>
-            <c:forEach var="xe" items="${dsXe}">
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="card product-card">
-                        <img src="img_xe/${xe.getAnh()}" class="card-img-top product-image" alt="${xe.getTenxe()}">
-                        <div class="card-body">
-                            <h5 class="card-title product-title">${xe.getTenxe()}</h5>
-                         <%--   <p class="card-text product-price">${xe.getGia()} VND</p> --%>
-                            <p class="card-text product-detail">${xe.getChitiet()}</p>
-                              <a href="userChat.jsp" class="btn btn-primary">Tư Vấn</a>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
-    </div>
+      
+		<h3 class="mb-4">Sản phẩm</h3>
+		<div class="row">
+		    <c:if test="${empty dsXe}">
+		        <div class="col-12">
+		            <p class="text-center text-muted">Không có sản phẩm nào trong loại này.</p>
+		        </div>
+		    </c:if>
+		    
+		    <c:forEach var="xe" items="${dsXe}">
+		        <div class="col-md-4 col-sm-6 mb-4">
+		            <div class="card product-card">
+		                <img src="img_xe/${xe.getAnh()}" class="card-img-top product-image" alt="${xe.getTenxe()}">
+		                <div class="card-body">
+		                    <h5 class="card-title product-title">${xe.getTenxe()}</h5>
+		                    <%-- <p class="card-text product-price">${xe.getGia()} VND</p> --%>
+		                    <p class="card-text product-detail">${xe.getChitiet()}</p>
+		
+		                    <div class="d-flex justify-content-center gap-2">
+		                        <a href="adminChat.jsp" class="btn btn-primary me-2">Tư Vấn</a>
+		                        <a href="GioHangController?maxe=${xe.getMaxe()}&tenxe=${xe.getTenxe()}&gia=${xe.getGia()}&anh=${xe.getAnh()}&chitiet=${xe.getChitiet()}" 
+		                           class="btn btn-success">
+		                            Mua
+		                        </a>
+		                    </div>
+		
+		                </div>
+		            </div>
+		        </div>
+		    </c:forEach>
+		</div>
+
     
-    
-    <!-- Footer -->
     <footer class="footer-section">
         <div class="container">
             <div class="row">
-                <!-- Liên hệ -->
+                
                 <div class="col-md-4">
                     <h4>LIÊN HỆ VỚI CHÚNG TÔI</h4>
                     <p><strong>CÔNG TY TNHH THƯƠNG MẠI QUANG PHƯƠNG</strong></p>
@@ -246,7 +253,7 @@
                     <p><i class="fas fa-phone"></i> Điện thoại: 0938 33 66 01</p>
                 </div>
 
-                <!-- Sản phẩm -->
+                
                 <div class="col-md-4">
                     <h4>SẢN PHẨM</h4>
                     <ul class="list-unstyled">

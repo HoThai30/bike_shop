@@ -7,7 +7,8 @@ public class Hang {
 	 private Long gia;
 	 private Long soluong;
 	 private Long thanhtien;
-	public Hang(String anh, String maxe, String tenxe, Long gia, Long soluong) {
+	 private String chitiet;
+	public Hang(String anh, String maxe, String tenxe, Long gia, Long soluong, String chitiet) {
 		super();
 		this.anh = anh;
 		this.maxe = maxe;
@@ -15,15 +16,12 @@ public class Hang {
 		this.gia = gia;
 		this.soluong = soluong;
 		this.thanhtien = soluong*gia;
-		
+		this.chitiet = chitiet;
 	   
 	}
 
-	public Hang(String tenXe, long soLuong, long gia, long thanhTien) {
-    this.tenxe = tenXe;
-    this.soluong = soLuong;
-    this.gia = gia;
-    this.thanhtien = thanhTien;
+	public Hang() {
+   
 }
 
 	public String getAnh() {
@@ -65,5 +63,13 @@ public class Hang {
 		this.thanhtien = soluong*gia;
 	}
 
+	public String getChitiet() {
+		return chitiet;
+	}
+
+	public void setChitiet(String chitiet) {
+		this.chitiet = chitiet;
+	}
+   
 	 
 }

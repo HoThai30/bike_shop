@@ -47,11 +47,11 @@ public class DangKiController extends HttpServlet {
         String confirmPass = request.getParameter("confirmPass");
 
         try {
-            // Kiểm tra nếu có thông tin đăng ký
+            
             if (hoten != null && !hoten.isEmpty() && email != null && !email.isEmpty() &&
                 tendn != null && !tendn.isEmpty() && pass != null && !pass.isEmpty() && confirmPass != null && !confirmPass.isEmpty()) {
                 
-                // Kiểm tra xem mật khẩu và xác nhận mật khẩu có khớp không
+               
                 if (!pass.equals(confirmPass)) {
                     request.setAttribute("message", "Mật khẩu và xác nhận mật khẩu không khớp.");
                     request.setAttribute("messageType", "danger");
@@ -59,27 +59,26 @@ public class DangKiController extends HttpServlet {
                     return;
                 }
 
-                // Tạo đối tượng KhachHang
+               
                 KhachHang kh = new KhachHang(0, hoten, diachi, sodt, email, tendn, pass);
 
-                // Tạo đối tượng DAO để thêm khách hàng
+              
                 KhachHangDao khachHangDao = new KhachHangDao();
                 boolean result = khachHangDao.dangKyTaiKhoan(kh);
 
-                // Xử lý kết quả
                 if (result) {
-                    // Đăng ký thành công
+                   
                     request.setAttribute("message", "Đăng ký thành công!");
                     request.setAttribute("messageType", "success");
-                    request.getRequestDispatcher("dangki.jsp").forward(request, response);
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
                 } else {
-                    // Đăng ký thất bại (ví dụ: tên đăng nhập hoặc email trùng lặp)
+                    
                     request.setAttribute("message", "Đăng ký thất bại! Tên đăng nhập hoặc email đã tồn tại.");
                     request.setAttribute("messageType", "danger");
                     request.getRequestDispatcher("dangki.jsp").forward(request, response);
                 }
             } else {
-                // Thiếu thông tin
+                
                 request.setAttribute("message", "Vui lòng nhập đầy đủ thông tin.");
                 request.setAttribute("messageType", "danger");
                 request.getRequestDispatcher("dangki.jsp").forward(request, response);

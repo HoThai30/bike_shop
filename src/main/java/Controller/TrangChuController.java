@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import SuKienModal.SuKien;
+import SuKienModal.SuKienDao;
 import loaiModal.LoaiBo;
 import xeModal.Xe;
 import xeModal.XeBo;
@@ -41,6 +43,15 @@ public class TrangChuController extends HttpServlet {
 			//lay xe VE
 			XeBo sbo = new XeBo();
 			ArrayList<Xe> ds = sbo.getXe(); 
+			ArrayList<Xe> top6Xe = new ArrayList<>();
+			for (int i = 0; i < Math.min(6, ds.size()); i++) {
+			    top6Xe.add(ds.get(i));
+			}
+			
+			SuKienDao sk = new SuKienDao();
+			ArrayList<SuKien> dssk = sk.getAllSuKien();
+			request.setAttribute("sukien", dssk);
+
 			//tim kiếm
 			String ml = request.getParameter("ml");
 			String key= request.getParameter("txttk");

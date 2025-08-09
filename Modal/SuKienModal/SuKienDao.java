@@ -31,4 +31,31 @@ public class SuKienDao {
 		kn.cn.close();
 		return sk;
    }
+	
+	public SuKien getSuKienByID(int id) throws Exception {
+	    SuKien suKien = null;
+	    ketnoi kn = new ketnoi();
+	    kn.ketnoi();
+
+	    String sql = "SELECT * FROM SuKien WHERE SuKienID = ?";
+	    PreparedStatement cmd = kn.cn.prepareStatement(sql);
+	    cmd.setInt(1, id);
+
+	    ResultSet rs = cmd.executeQuery();
+	    if (rs.next()) {
+	        suKien = new SuKien(
+	            rs.getInt("SuKienID"),
+	            rs.getInt("Ngay"),
+	            rs.getString("Thang"),
+	            rs.getString("TieuDe"),
+	            rs.getString("MoTa"),
+	            rs.getString("DuongDanAnh")
+	        );
+	    }
+
+	    rs.close();
+	    kn.cn.close();
+	    return suKien;
+	}
+
 }
